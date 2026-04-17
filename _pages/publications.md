@@ -1,0 +1,45 @@
+---
+title: "Publications"
+permalink: /publications/
+---
+
+## Books
+<div>
+<p><span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>H. Hajduk</span> (2023) <em>Property-preserving numerical schemes for conservation laws</em> (World Scientific), <a href="https://doi.org/10.1142/13466">doi:10.1142/13466</a> </p>
+</div>
+
+## Journal Articles
+<div>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span> (2025) <em>Improvements of algebraic flux-correction schemes based on Bernstein finite elements</em>. J. Numer. Math. <strong>33</strong>: 375-402, <a href="https://doi.org/10.1515/jnma-2024-0098">doi:10.1515/jnma-2024-0098</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>G. Lube</span>, <span style='font-variant: small-caps;'>P. Öffner</span> (2025) <em>Locally energy-stable finite element schemes for incompressible flow problems: Design and analysis for equal-order interpolations</em>. Comput. Fluids <strong>294</strong>: 106622, <a href="https://doi.org/10.1016/j.compfluid.2025.106622">doi:10.1016/j.compfluid.2025.106622</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>A. Rupp</span> (2023) <em>Analysis of algebraic flux correction for semi-discrete advection problems</em>. BIT Numer. Math. <strong>63</strong>: 8, <a href="https://doi.org/10.1007/s10543-023-00957-z">doi:10.1007/s10543-023-00957-z</a></p>
+<p><span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>A. Rupp</span> (2022) <em>Limiter-based entropy stabilization of semi-discrete and fully discrete schemes for nonlinear hyperbolic problems</em>. Comput. Methods Appl. Mech. Eng. <strong>389</strong>: 114428, <a href="https://doi.org/10.1016/j.cma.2021.114428">doi:10.1016/j.cma.2021.114428</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span> (2021) <em>Monolithic convex limiting in discontinuous Galerkin discretizations of hyperbolic conservation laws</em>. Comput. Math. Appl. <strong>87</strong>: 120-138, <a href="https://doi.org/10.1016/j.camwa.2021.02.012">doi:10.1016/j.camwa.2021.02.012</a></p>
+<p><span style='font-variant: small-caps;'>B. Reuter</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>A. Rupp</span>, <span style='font-variant: small-caps;'>F. Frank</span>, <span style='font-variant: small-caps;'>V. Aizinger</span>, <span style='font-variant: small-caps;'>P. Knabner</span> (2021) <em>FESTUNG 1.0: Overview, usage, and example applications of the MATLAB / GNU Octave toolbox for discontinuous Galerkin methods</em>. Comput. Math. Appl. <strong>81</strong>: 3-41, <a href="https://doi.org/10.1016/j.camwa.2020.08.018">doi:10.1016/j.camwa.2020.08.018</a></p>
+<p><span style='font-variant: small-caps;'>M. Hauck</span>, <span style='font-variant: small-caps;'>V. Aizinger</span>, <span style='font-variant: small-caps;'>F. Frank</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>A. Rupp</span> (2020) <em>Enriched Galerkin method for the shallow-water equations</em>. Int. J. Geomath. <strong>11</strong>: 31, <a href="https://doi.org/10.1007/s13137-020-00167-7">doi:10.1007/s13137-020-00167-7</a></p>
+<p><span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>A. Rupp</span> (2020) <em>Locally bound-preserving enriched Galerkin methods for the linear advection equation</em>. Comput. Fluids <strong>205</strong>: 104525, <a href="https://doi.org/10.1016/j.compfluid.2020.104525">doi:10.1016/j.compfluid.2020.104525</a></p>
+<p><span style='font-variant: small-caps;'>M. Wang</span>, <span style='font-variant: small-caps;'>Z. Wang</span>, <span style='font-variant: small-caps;'>H. Hajduk</span> (2020) <em>Nonlinear interactions of nearly non-dispersive equatorial shallow-water waves</em>. IMA J. Appl. Math. <strong>85</strong>: 365-384, <a href="https://doi.org/10.1093/imamat/hxaa009">doi:10.1093/imamat/hxaa009</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>T. Kolev</span>, <span style='font-variant: small-caps;'>V. Tomov</span>, <span style='font-variant: small-caps;'>I. Tomas</span>, <span style='font-variant: small-caps;'>J. N. Shadid</span> (2020) <em>Matrix-free subcell residual distribution for Bernstein finite elements: Monolithic limiting</em>. Comput. Fluids <strong>200</strong>: 104451, <a href="https://doi.org/10.1016/j.compfluid.2020.104451">doi:10.1016/j.compfluid.2020.104451</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>T. Kolev</span>, <span style='font-variant: small-caps;'>R. Abgrall</span> (2020) <em>Matrix-free subcell residual distribution for Bernstein finite element discretizations of linear advection equations</em>. Comput. Methods Appl. Mech. Eng. <strong>359</strong>: 112658, <a href="https://doi.org/10.1016/j.cma.2019.112658">doi:10.1016/j.cma.2019.112658</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>V. Aizinger</span> (2019) <em>New directional vector limiters for discontinuous Galerkin methods</em>. J. Comput. Phys. <strong>384</strong>: 308-325, <a href="https://doi.org/10.1016/j.jcp.2019.01.032">doi:10.1016/j.jcp.2019.01.032</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>B. R. Hodges</span>, <span style='font-variant: small-caps;'>V. Aizinger</span>, <span style='font-variant: small-caps;'>B. Reuter</span> (2018) <em>Locally filtered transport for computational efficiency in multi-component advection-reaction models</em>. Environ. Modell. Softw. <strong>102</strong>: 185-198, <a href="https://doi.org/10.1016/j.envsoft.2018.01.003">doi:10.1016/j.envsoft.2018.01.003</a> </p>
+</div>
+
+## Proceedings
+<div>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span> (2022) <em>Bound-preserving and entropy-stable algebraic flux correction schemes for the shallow water equations with topography</em>. In <em>Eleventh international conference on computational fluid dynamics</em> (ICCFD11 proceedings), URL: <a href="https://www.iccfd.org/iccfd11/assets/pdf/papers/ICCFD11_Paper-3003.pdf">https://www.iccfd.org/iccfd11/assets/pdf/papers/ICCFD11_Paper-3003.pdf</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>V. Aizinger</span> (2020) <em>Bathymetry reconstruction using inverse shallow water models: Finite element discretization and regularization</em>. In <em>Numerical methods for flows</em>, Lecture notes in computational science and engineering, 223-230 (Springer), <a href="https://doi.org/10.1007/978-3-030-30705-9_20">doi:10.1007/978-3-030-30705-9_20</a> </p>
+</div>
+
+## Preprints
+<div>
+<p><span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>J. Vedral</span> (2025) <em>A matrix-free convex limiting framework for continuous Galerkin methods with nonlinear stabilization</em>. Preprint, arXiv: <a href="https://arxiv.org/abs/2509.04673">2509.04673</a> [math.NA] </p>
+</div>
+
+## Thesis
+<div>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span> (2022) <em>Algebraically constrained finite element methods for hyperbolic problems with applications in geophysics and gas dynamics</em>. Ph.D. thesis, TU Dortmund University, <a href="https://doi.org/10.17877/DE290R-22850">doi:10.17877/DE290R-22850</a></p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span> (2017) <em>Numerical investigation of direct bathymetry reconstruction based on a modified shallow-water model</em>. Master's thesis, Friedrich-Alexander-University Erlangen-Nuremberg</p>
+<p><span style='font-variant: small-caps;'>H. Hajduk</span> (2014) <em>Optimal estimates on the waiting time for the porous media equation</em>. (translated title) Bachelor's thesis, Friedrich-Alexander-University Erlangen-Nuremberg </p>
+</div>
+

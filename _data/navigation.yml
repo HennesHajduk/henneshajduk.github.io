@@ -1,0 +1,25 @@
+main:
+- title: "Academic CV"
+  url: /cv/
+
+- title: "Research"
+  url: /research/
+
+- title: "Publications"
+  url: /publications/
+
+# - title: "Talks"
+#   url: /talks/
+
+- title: "Computational Results"
+  url: /simulations/
+
+- title: "Teaching Experience"
+  url: /teaching/
+
+- title: "Activities"
+  url: /activities/
+
+#- title: "More"
+#  url: /more/
+  
