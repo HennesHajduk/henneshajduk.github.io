@@ -3,71 +3,64 @@ title: "Computational Results"
 permalink: /simulations/
 ---
 
-Below you can find snapshots and videos produced by some of my numerical simulations.
-
-This site is still under development. More information and numerical results will follow soon.
-
 <style>
-.sim-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.row {
+  display: flex;
+  justify-content: center;
   gap: 25px;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
 
-.sim-grid figure {
-  margin: 0;
+figure {
   text-align: center;
+  margin: 0;
 }
 
-.sim-grid img, .sim-grid video {
+figure img, figure video {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.sim-grid figcaption {
+figcaption {
   margin-top: 8px;
   font-size: 0.9em;
   color: #555;
 }
 </style>
 
-<div class="sim-grid">
-
-  <figure>
-    <a href="/simulation-data/bc_inst.mp4">
-      <img src="/simulation-data/bi-init.png" alt="Baroclinic instability">
-    </a>
+<!-- Row 1: VIDEO (full width) -->
+<div class="row">
+  <figure style="max-width: 800px;">
+    <video controls>
+      <source src="/simulation-data/bc_inst.mp4" type="video/mp4">
+    </video>
     <figcaption>
-      Breakup of unstable Rossby waves in a two-layer quasi-geostrophic model. 1024x1024 grid using a semi-spectral model with hyperviscosity stabilization. Click to watch video.
+      Breakup of unstable Rossby waves in a two-layer quasi-geostrophic model.
     </figcaption>
   </figure>
-
-  <figure>
-    <img src="/simulation-data/sbi.png" alt="Shock-bubble interaction">
-    <figcaption>
-      Snapshot of an artificial shock–bubble interaction setup for the compressible Euler equations 1024x1024 grid using a positivity-preserving discontinuous Galerkin method.
-    </figcaption>
-  </figure>
-
-  <figure>
-    <img src="/simulation-data/khi.png" alt="Kelvin–Helmholtz instability">
-    <figcaption>
-      Snapshot of a Kelvin–Helmholtz instability for the compressible Euler equations 1024x1024 grid using a positivity-preserving discontinuous Galerkin method.
-    </figcaption>
-  </figure>
-
 </div>
 
-<!-- Wide figures -->
-<div style="margin-top:40px;">
+<!-- Row 2: TWO SNAPSHOTS -->
+<div class="row">
+  <figure style="max-width: 350px;">
+    <img src="/simulation-data/sbi.png" alt="Shock-bubble interaction">
+    <figcaption>Shock–bubble interaction.</figcaption>
+  </figure>
 
-  <figure style="text-align:center;">
-    <img src="/simulation-data/slope.png" alt="Critical slope" style="max-width:80%;">
+  <figure style="max-width: 350px;">
+    <img src="/simulation-data/khi.png" alt="Kelvin–Helmholtz instability">
+    <figcaption>Kelvin–Helmholtz instability.</figcaption>
+  </figure>
+</div>
+
+<!-- Row 3: SLOPE (full width) -->
+<div class="row">
+  <figure style="max-width: 800px;">
+    <img src="/simulation-data/slope.png" alt="Critical slope">
     <figcaption>
       Ratio of topographic and critical slopes away from the equatorial region.
     </figcaption>
   </figure>
-
 </div>
