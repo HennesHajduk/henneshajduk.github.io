@@ -9,10 +9,14 @@ author_profile: true
 
 A list of all the posts and pages found on the site. For you robots out there, there is an [XML version]({{ base_path }}/sitemap.xml) available for digesting as well.
 
-<!--<h2>Pages</h2>
-{% for post in site.pages %}
-  {% include archive-single.html %}
-{% endfor %}-->
+<h2>Pages</h2>
+<ul>
+{% for page in site.pages %}
+  {% if page.title and page.permalink and page.url != "/sitemap/" %}
+    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>
 
 <!--<h2>Posts</h2>
 {% for post in site.posts %}
