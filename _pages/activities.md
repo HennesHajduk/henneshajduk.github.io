@@ -11,4 +11,4 @@ Following this initial stay, I returned to LLNL for extended research visits and
 
 I have been nominated twice for the MFEM Visualization Contest awards and received the Best Thesis Award from the Department of Mathematics at TU Dortmund University.
 
-Furthermore, I was a co-organizer of the MoSt 2020 workshop on *Modeling and Simulation of Transport Phenomena*.
+Furthermore, I was a co-organizer of the MoST 2020 workshop on *Modeling and Simulation of Transport Phenomena*.
