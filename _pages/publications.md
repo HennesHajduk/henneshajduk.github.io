@@ -10,6 +10,8 @@ permalink: /publications/
 
 ## Journal Articles
 <div>
+<p><span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>J. Vedral</span> (2026) <em>An element-based convex limiting framework for continuous Galerkin methods with nonlinear stabilization</em>. J. Comput. Phys. <strong>560</strong>: 114952, <a href="https://doi.org/10.1016/j.jcp.2026.114952">doi:10.1016/j.jcp.2026.114952</a></p>
+<p><span style='font-variant: small-caps;'>J. H. Lacasce</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>J. Br{\ae</span>ndsh{\o}i} (2026) <em>Unstable Rossby waves over bathymetry</em>. J. Fluid Mech. <strong>1034</strong>: A10, <a href="https://doi.org/10.1017/jfm.2026.11482">doi:10.1017/jfm.2026.11482</a></p>
 <p><span style='font-variant: small-caps;'>H. Hajduk</span> (2025) <em>Improvements of algebraic flux-correction schemes based on Bernstein finite elements</em>. J. Numer. Math. <strong>33</strong>: 375-402, <a href="https://doi.org/10.1515/jnma-2024-0098">doi:10.1515/jnma-2024-0098</a></p>
 <p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>G. Lube</span>, <span style='font-variant: small-caps;'>P. Öffner</span> (2025) <em>Locally energy-stable finite element schemes for incompressible flow problems: Design and analysis for equal-order interpolations</em>. Comput. Fluids <strong>294</strong>: 106622, <a href="https://doi.org/10.1016/j.compfluid.2025.106622">doi:10.1016/j.compfluid.2025.106622</a></p>
 <p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>A. Rupp</span> (2023) <em>Analysis of algebraic flux correction for semi-discrete advection problems</em>. BIT Numer. Math. <strong>63</strong>: 8, <a href="https://doi.org/10.1007/s10543-023-00957-z">doi:10.1007/s10543-023-00957-z</a></p>
@@ -33,7 +35,7 @@ permalink: /publications/
 
 ## Preprints
 <div>
-<p><span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>J. Vedral</span> (2025) <em>A matrix-free convex limiting framework for continuous Galerkin methods with nonlinear stabilization</em>. Preprint, arXiv: <a href="https://arxiv.org/abs/2509.04673">2509.04673</a> [math.NA] </p>
+<p></p>
 </div>
 
 ## Thesis
