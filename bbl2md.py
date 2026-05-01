@@ -23,23 +23,37 @@ def process_bbl(path):
 
     html_entries = []
 
+    # common latex special chars / accents
+    latex_map = {
+        r'\{\\"a\}': "ä",
+        r'\{\\"A\}': "Ä",
+        r'\{\\"o\}': "ö",
+        r'\{\\"O\}': "Ö",
+        r'\{\\"u\}': "ü",
+        r'\{\\"U\}': "Ü",
+        r"{\\ss}"  : "ß",
+        r"{\\ae}"  : "æ",
+        r"{\\AE}"  : "Æ",
+        r"{\\oe}"  : "œ",
+        r"{\\OE}"  : "Œ",
+        r"{\\o}"   : "ø",
+        r"{\\O}"   : "Ø",
+        r"{\\aa}"  : "å",
+        r"{\\AA}"  : "Å",
+    }
+
     for e in entries:
         e = e.strip()
         if not e:
             continue
 
+        # handle special characters
+        for k, v in latex_map.items():
+            e = re.sub(k, v, e)
+
         e = re.sub(r"\s+", " ", e)
         e = e.replace("~", " ")
         e = e.replace("--", "-")
-        e = re.sub(r'\{\\"a\}', 'ä', e)
-        e = re.sub(r'\{\\"o\}', 'ö', e)
-        e = re.sub(r'\{\\"u\}', 'ü', e)
-        e = re.sub(r'\{\\"A\}', 'Ä', e)
-        e = re.sub(r'\{\\"O\}', 'Ö', e)
-        e = re.sub(r'\{\\"U\}', 'Ü', e)
-        e = re.sub(r'\\"a', 'ä', e)
-        e = re.sub(r'\\"o', 'ö', e)
-        e = re.sub(r'\\"u', 'ü', e)
         e = re.sub(
             r"\\urlprefix\s*\\url\{(.*?)\}",
             r'URL: <a href="\1">\1</a>',
