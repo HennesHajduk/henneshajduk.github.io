@@ -32,7 +32,16 @@ figcaption {
 
 <!-- Row 1 (full width) -->
 <div class="row">
-  <figure style="max-width: 800px;">
+  <figure style="max-width: 350px;">
+    <video controls>
+      <source src="/simulation-data/vst.mp4" type="video/mp4">
+    </video>
+    <figcaption>
+      Shock tube problem for the compressible Navier-Stokes equations: Viscous boundary layers and reflecting boundaries influence the flow behavior. Click to watch video.
+    </figcaption>
+  </figure>
+
+  <figure style="max-width: 350px;">
     <video controls>
       <source src="/simulation-data/bc_inst.mp4" type="video/mp4">
     </video>
