@@ -86,7 +86,7 @@ staticman:
   filename               : comment-{@timestamp}
   format                 : "yml"
   moderation             : true
-  path                   : "_data/comments/{options.slug}"
+  path                   : "data/comments/{options.slug}"
   requiredFields         : ['name', 'email', 'message']
   transforms:
     email                : "md5"
@@ -131,10 +131,10 @@ analytics:
 
 
 # Reading Files
+data_dir: data
 include:
   - .htaccess
-  - _pages
-  - files
+  - _assets
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -143,9 +143,9 @@ exclude:
   - .github
   - .jekyll-assets-cache
   - .sass-cache
-  - assets/js/_main.js
-  - assets/js/plugins
-  - assets/js/vendor
+  - _assets/js/_main.js
+  - _assets/js/plugins
+  - _assets/js/vendor
   - CHANGELOG
   - Capfile
   - config
@@ -215,7 +215,7 @@ defaults:
       comments: true
       share: true
       related: true
-  # _pages
+  # pages
   - scope:
       path: ""
       type: pages
