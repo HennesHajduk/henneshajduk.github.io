@@ -11,11 +11,14 @@ main:
 - title: "Scientific Activities"
   url: /activities/
 
+- title: "Talk Map"
+  url: /talkmap.html
+
 - title: "Teaching Experience"
   url: /teaching/
 
-# - title: "Talks"
-#   url: /talks/
+- title: "Talks"
+  url: /talks/
 
 - title: "Visualizations"
   url: /simulations/
