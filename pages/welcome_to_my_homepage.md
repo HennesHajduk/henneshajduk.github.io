@@ -5,7 +5,7 @@ permalink: /
 author_profile: true
 ---
 
-I am Hennes Hajduk, Assistant Professor for Numerical Methods at the Department of Mathematics of TU Dortmund University, Germany.
+I am Hennes Hajduk, Assistant Professor for hardware-oriented and physics-conforming numerical methods with applications in fluid dynamics at the Department of Mathematics at TU Dortmund University, Germany.
 
 My research focuses on the conceptualization, development, implementation, and analysis of efficient numerical methods for solving partial differential equations with applications in computational fluid dynamics.
 In particular, my team and I design novel computational schemes for convection-dominated problems.
