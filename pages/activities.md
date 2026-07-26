@@ -3,8 +3,6 @@ title: "Scientific Activities"
 permalink: /activities/
 ---
 
-# Scientific Activities
-
 ## Research Visits
 
 International research collaborations are an important part of my work. In addition to conference travel, I have conducted research visits at the following institutions:
