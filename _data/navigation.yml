@@ -2,24 +2,26 @@ main:
 - title: "Academic CV"
   url: /cv/
 
-- title: "Research"
-  url: /research/
-
 - title: "Publications"
   url: /publications/
 
-# - title: "Talks"
-#   url: /talks/
+- title: "Research"
+  url: /research/
 
-- title: "Computational Results"
-  url: /simulations/
+- title: "Scientific Activities"
+  url: /activities/
 
 - title: "Teaching Experience"
   url: /teaching/
 
-- title: "Activities"
-  url: /activities/
+# - title: "Talks"
+#   url: /talks/
+
+- title: "Visualizations"
+  url: /simulations/
+
+- title: "Job Opportunities"
+  url: /jobs/
 
 #- title: "More"
 #  url: /more/
-  

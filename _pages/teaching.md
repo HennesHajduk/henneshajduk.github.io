@@ -6,9 +6,9 @@ permalink: /teaching/
 ## Lectures
 
 | Course | Institution | Term |
-|--------|------------|------|
-| Theory and numerics of geophysical flows | TUD | WS 25 |
+|--------|-------------|------|
 | Discontinuous Galerkin methods | TUD | SS 26 |
+| Theory and numerics of geophysical flows | TUD | WS 25 |
 
 ---
 
