@@ -17,8 +17,8 @@
     </head>
     <body>
 
-    	<div id="map"></div>
-    	<span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span>
+        <div id="map"></div>
+        <p style="margin-top: 20px;">Each numbered circle is a cluster of nearby talks. Hover over one to see the area it covers, or click it to zoom in and split it into individual markers.</p>
     	<script type="text/javascript">
     		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
               maxZoom: 18,
@@ -42,4 +42,3 @@
     	</script>
     </body>
     </html>
-    

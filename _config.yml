@@ -54,7 +54,7 @@ publication_category:
   books:
     title: 'Books'
   articles:
-    title: 'Journal Articles'    
+    title: 'Journal Articles'
   conferences:
     title: 'Conference proceedings'
   preprint:
@@ -109,7 +109,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : 
+  username               :
 facebook:
   username               :
   app_id                 :
@@ -135,6 +135,7 @@ data_dir: data
 include:
   - .htaccess
   - _assets
+  - _talkmap
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"

@@ -34,8 +34,8 @@ figcaption {
 
 <div class="row">
   <figure style="max-width: 800px;">
-    <video controls poster="/simulation-data/vst.png">
-      <source src="/simulation-data/vst.mp4" type="video/mp4">
+    <video controls poster="/images/vst.png">
+      <source src="/images/vst.mp4" type="video/mp4">
     </video>
   <figcaption>
     <strong>Viscous shock tube (compressible Navier–Stokes equations).</strong>
@@ -46,8 +46,8 @@ figcaption {
 
 <div class="row">
   <figure style="max-width: 800px;">
-    <video controls poster="/simulation-data/bc_inst.png">
-      <source src="/simulation-data/bc_inst.mp4" type="video/mp4">
+    <video controls poster="/images/bc_inst.png">
+      <source src="/images/bc_inst.mp4" type="video/mp4">
     </video>
     <figcaption>
       <strong>Baroclinic instability (two-layer quasi-geostrophic model).</strong>
@@ -58,8 +58,8 @@ figcaption {
 
 <div class="row">
   <figure style="max-width: 350px;">
-    <video controls poster="/simulation-data/sbi.png">
-      <source src="/simulation-data/sbi.mp4" type="video/mp4">
+    <video controls poster="/images/sbi.png">
+      <source src="/images/sbi.mp4" type="video/mp4">
     </video>
     <figcaption>
       <strong>Shock–bubble interaction (compressible Euler equations).</strong>
@@ -68,8 +68,8 @@ figcaption {
   </figure>
 
   <figure style="max-width: 350px;">
-    <video controls poster="/simulation-data/khi.png">
-      <source src="/simulation-data/khi.mp4" type="video/mp4">
+    <video controls poster="/images/khi.png">
+      <source src="/images/khi.mp4" type="video/mp4">
     </video>
     <figcaption>
       <strong>Kelvin–Helmholtz instability (compressible Euler equations).</strong>
@@ -80,7 +80,7 @@ figcaption {
 
 <div class="row">
   <figure style="max-width: 800px;">
-    <img src="/simulation-data/slope.png" alt="Critical slope">
+    <img src="/images/slope.png" alt="Critical slope">
     <figcaption>
       <strong>Global ocean diagnostics.</strong>
       Visualization of the ratio between topographic and critical slopes derived from observational ocean data. This example illustrates scientific data processing, large-scale visualization, and the analysis of geophysical data sets.

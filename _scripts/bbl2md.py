@@ -98,5 +98,5 @@ for section, path in files.items():
     output += f"## {section}\n<div>\n{html}\n</div>\n\n"
 
 
-with open("_pages/publications.md", "w") as f:
+with open("pages/publications.md", "w") as f:
     f.write(output)

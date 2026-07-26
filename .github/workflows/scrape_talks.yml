@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - '_talks/**'
-      - 'talkmap.ipynb'
+      - '_scripts/talkmap.ipynb'
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
 
     - name: Run Jupyter Notebook
       run: |
-        jupyter nbconvert --to notebook --execute talkmap.ipynb --output talkmap_out.ipynb
+        jupyter nbconvert --to notebook --execute _scripts/talkmap.ipynb --output talkmap_out.ipynb --output-dir=_scripts --ExecutePreprocessor.cwd=.
 
     - name: Commit changes
       run: |
