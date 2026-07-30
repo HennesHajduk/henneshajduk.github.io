@@ -52,11 +52,6 @@
     			maxBounds: worldBounds,
     			maxBoundsViscosity: 1.0
     		});
-    		map.fitBounds(viewBounds);
-    		// The page loads already at this fully-fitted view, and can't be
-    		// zoomed out past it -- doing so would only reintroduce a margin,
-    		// or at the true whole-world zoom, force a square-shaped view.
-    		map.setMinZoom(map.getZoom());
 
     		var markers = L.markerClusterGroup({
     			showCoverageOnHover: false,
@@ -70,6 +65,26 @@
     			markers.addLayer(marker);
     		}
     		map.addLayer(markers);
+
+    		// fitBounds() needs the container's true, final size to compute an
+    		// exact fit. Calling it too early (before the iframe's own layout
+    		// has settled) locks in a zoom for a stale, slightly-off box --
+    		// which is exactly what caused a grey margin to appear only after
+    		// zooming out once more. invalidateSize() + waiting for the window
+    		// "load" event guarantees the container is fully settled first.
+    		function fitToWholeWorld() {
+    			map.invalidateSize();
+    			map.fitBounds(viewBounds);
+    			// The page loads already at this fully-fitted view, and can't
+    			// be zoomed out past it -- doing so would only reintroduce a
+    			// margin, or at the true whole-world zoom, force a square shape.
+    			map.setMinZoom(map.getZoom());
+    		}
+    		if (document.readyState === 'complete') {
+    			fitToWholeWorld();
+    		} else {
+    			window.addEventListener('load', fitToWholeWorld);
+    		}
     	</script>
     </body>
     </html>
