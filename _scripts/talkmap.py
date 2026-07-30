@@ -56,7 +56,9 @@ for file in g:
     location = data['location'].strip()
     city = data.get('city', location.split(',')[0]).strip()
     month_year = data['date'].strftime('%b %Y')
-    description = f"{title}<br />{month_year}, {city} — {venue}"
+    description = f"<strong>{title}</strong><br>{month_year}<br>{venue}<br>{city}"
+    if data.get('online'):
+        description += "<br><em>(online)</em>"
 
     # Strip trailing "(online)"-style annotations before geocoding
     geocode_query = re.sub(r"\s*\([^)]*\)\s*$", "", location)
