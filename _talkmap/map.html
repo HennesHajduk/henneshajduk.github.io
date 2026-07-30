@@ -4,31 +4,60 @@
     <head>
     	<title>Leaflet debug page</title>
 
-    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+    	<!-- Upgraded from 1.0.0-beta.2 (2016 pre-release): needed for zoomSnap,
+    	     which lets the view below fit its box exactly instead of rounding
+    	     to the nearest whole zoom. -->
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<link rel="stylesheet" href="leaflet_dist/screen.css" />
-
     	<link rel="stylesheet" href="leaflet_dist/MarkerCluster.css" />
     	<link rel="stylesheet" href="leaflet_dist/MarkerCluster.Default.css" />
     	<script src="leaflet_dist/leaflet.markercluster-src.js"></script>
     	<script src="org-locations.js"></script>
-
+    	<style>
+    		/* No default UA body margin -- that was contributing to the grey
+    		   strip around the edges. #map fills whatever box the embedding
+    		   page gives it (see the iframe in pages/talk_map.html). */
+    		html, body { margin: 0; padding: 0; height: 100%; }
+    		#map {
+    			width: 100%;
+    			height: 100%;
+    			border: none;
+    		}
+    	</style>
     </head>
     <body>
 
         <div id="map"></div>
-        <p style="margin-top: 20px;">Each numbered circle is a cluster of nearby talks. Hover over one to see the area it covers, or click it to zoom in and split it into individual markers.</p>
     	<script type="text/javascript">
-    		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-              maxZoom: 18,
-              attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-                    }),
-    			latlng = L.latLng(30, 10);
-    		// minZoom 1 is the lowest zoom at which the whole world (512x512px)
-    		// still fits inside this 800x600 box without being cropped, so this
-    		// is the floor: you can't zoom out past seeing the complete globe.
-    		var map = L.map('map', {center: latlng, zoom: 0.7, minZoom: 1, layers: [tiles]});
+    		// The old Esri World_Street_Map service returns "Map data not
+    		// available yet" placeholder tiles over open ocean at low zoom.
+    		// OSM's standard tiles have full global coverage at every zoom.
+    		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+              noWrap: true,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    });
+    		// A full 360x180 view is always square, so a wide box would always
+    		// leave a grey margin somewhere. Cropping the empty polar ocean/ice
+    		// down to a -55..78 latitude band (still covering every talk
+    		// location) gives a naturally wide view that fills this box with no
+    		// leftover margin -- zoomSnap:0 lets the fit be an exact fractional
+    		// zoom rather than rounded to the nearest whole level.
+    		var viewBounds = L.latLngBounds(L.latLng(-55, -180), L.latLng(78, 180));
+    		var worldBounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
+    		var map = L.map('map', {
+    			layers: [tiles],
+    			zoomSnap: 0,
+    			maxBounds: worldBounds,
+    			maxBoundsViscosity: 1.0
+    		});
+    		map.fitBounds(viewBounds);
+    		// The page loads already at this fully-fitted view, and can't be
+    		// zoomed out past it -- doing so would only reintroduce a margin,
+    		// or at the true whole-world zoom, force a square-shaped view.
+    		map.setMinZoom(map.getZoom());
+
     		var markers = L.markerClusterGroup({
     			showCoverageOnHover: false,
     			maxClusterRadius: 80
@@ -41,7 +70,6 @@
     			markers.addLayer(marker);
     		}
     		map.addLayer(markers);
-    		map.zoomIn();
     	</script>
     </body>
     </html>
