@@ -28,10 +28,15 @@
 
         <div id="map"></div>
     	<script type="text/javascript">
-    		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-              maxZoom: 18,
+    		// The old Esri World_Street_Map service used here previously returns
+    		// "Map data not available yet" placeholder tiles over open ocean at
+    		// low zoom -- which is most of this wide, mostly-ocean view. OSM's
+    		// standard tiles have full global coverage (oceans render as water,
+    		// not placeholders) at every zoom level.
+    		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
               noWrap: true,
-              attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     });
     		// A full 360x180 Mercator view is always square (grey margins are
     		// unavoidable in a wide box); cropping the polar ocean/ice down to
