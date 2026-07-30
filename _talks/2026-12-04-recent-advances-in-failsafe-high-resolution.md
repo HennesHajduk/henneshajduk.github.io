@@ -6,5 +6,6 @@ venue: "Saarbrücken University"
 date: 2026-12-04
 location: "Saarbrücken, Germany"
 city: "Saarbrücken"
+online: false
 permalink: /talks/2026-12-04-recent-advances-in-failsafe-high-resolution
 ---

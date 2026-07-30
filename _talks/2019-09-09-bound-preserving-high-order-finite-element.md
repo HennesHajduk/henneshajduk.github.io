@@ -6,5 +6,6 @@ venue: "MultiMat: 9th International Conference on Numerical Methods for Multi-Ma
 date: 2019-09-09
 location: "Trento, Italy"
 city: "Trento"
+online: false
 permalink: /talks/2019-09-09-bound-preserving-high-order-finite-element
 ---

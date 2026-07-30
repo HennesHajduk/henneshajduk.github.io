@@ -6,5 +6,6 @@ venue: "School of Engineering Science, Lappeenranta-Lahti University of Technolo
 date: 2024-02-05
 location: "Lappeenranta, Finland"
 city: "Lappeenranta"
+online: false
 permalink: /talks/2024-02-05-monolithic-convex-limiting-techniques-for-finite
 ---

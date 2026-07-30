@@ -6,5 +6,6 @@ venue: "MoST: Modeling and Simulation of Transport Phenomena"
 date: 2025-07-28
 location: "Treis-Karden, Germany"
 city: "Treis-Karden"
+online: false
 permalink: /talks/2025-07-28-failsafe-limiting-for-high-order-weno
 ---

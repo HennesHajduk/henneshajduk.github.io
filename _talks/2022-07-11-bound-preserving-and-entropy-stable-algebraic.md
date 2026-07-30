@@ -6,5 +6,6 @@ venue: "ICCFD11: Eleventh International Conference on Computational Fluid Dynami
 date: 2022-07-11
 location: "Maui, USA"
 city: "Maui"
+online: false
 permalink: /talks/2022-07-11-bound-preserving-and-entropy-stable-algebraic
 ---

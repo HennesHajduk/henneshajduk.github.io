@@ -6,5 +6,6 @@ venue: "SIAM CSE: SIAM Conference on Computational Science and Engineering"
 date: 2019-02-25
 location: "Spokane, USA"
 city: "Spokane"
+online: false
 permalink: /talks/2019-02-25-matrix-free-advection-based-remap-algorithms
 ---

@@ -6,5 +6,6 @@ venue: "Workshop Mathematics and Environment"
 date: 2026-06-12
 location: "Hanover, Germany"
 city: "Hanover"
+online: false
 permalink: /talks/2026-06-12-well-balanced-entropy-stable-and-positivity
 ---

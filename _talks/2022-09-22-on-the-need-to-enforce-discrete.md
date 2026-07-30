@@ -6,5 +6,6 @@ venue: "MultiMat: 10th International Conference on Numerical Methods for Multi-M
 date: 2022-09-22
 location: "Zürich, Switzerland"
 city: "Zürich"
+online: false
 permalink: /talks/2022-09-22-on-the-need-to-enforce-discrete
 ---

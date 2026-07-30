@@ -6,5 +6,6 @@ venue: "Algoritmy: Conference on Scientific Computing"
 date: 2020-09-10
 location: "Vysoké Tatry, Slovakia"
 city: "Vysoké Tatry"
+online: false
 permalink: /talks/2020-09-10-monolithic-convex-limiting-in-high-order
 ---

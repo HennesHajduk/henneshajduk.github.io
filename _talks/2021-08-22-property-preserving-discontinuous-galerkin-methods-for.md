@@ -4,7 +4,8 @@ collection: talks
 type: "Contributed talk"
 venue: "Banff International Research Station for Mathematical Innovation and Discovery: Bound-Preserving Space and Time Discretizations for Convection-Dominated Problems"
 date: 2021-08-22
-location: "Casa Matemática Oaxaca, Mexico (online)"
+location: "Casa Matemática Oaxaca, Mexico"
 city: "Casa Matemática Oaxaca"
+online: true
 permalink: /talks/2021-08-22-property-preserving-discontinuous-galerkin-methods-for
 ---

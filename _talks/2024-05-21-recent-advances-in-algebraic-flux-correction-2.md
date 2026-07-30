@@ -6,5 +6,6 @@ venue: "Trends in Scientific Computing -- Celebrating 30 years of Scientific Com
 date: 2024-05-21
 location: "Dortmund, Germany"
 city: "Dortmund"
+online: false
 permalink: /talks/2024-05-21-recent-advances-in-algebraic-flux-correction-2
 ---

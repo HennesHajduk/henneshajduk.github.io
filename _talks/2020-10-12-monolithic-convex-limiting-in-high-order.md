@@ -6,5 +6,6 @@ venue: "MoST: Modeling and Simulation of Transport Phenomena (as co-organizer)"
 date: 2020-10-12
 location: "Treis-Karden, Germany"
 city: "Treis-Karden"
+online: false
 permalink: /talks/2020-10-12-monolithic-convex-limiting-in-high-order
 ---

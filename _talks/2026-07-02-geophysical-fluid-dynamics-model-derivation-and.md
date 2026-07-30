@@ -6,5 +6,6 @@ venue: "Institute of Mathematics, TU Clausthal"
 date: 2026-07-02
 location: "Clausthal-Zellerfeld, Germany"
 city: "Clausthal-Zellerfeld"
+online: false
 permalink: /talks/2026-07-02-geophysical-fluid-dynamics-model-derivation-and
 ---

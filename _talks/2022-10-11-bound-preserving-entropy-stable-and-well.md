@@ -6,5 +6,6 @@ venue: "Essentially hyperbolic problems: unconventional numerics, and applicatio
 date: 2022-10-11
 location: "Monte Verità, Ascona, Switzerland"
 city: "Monte Verità"
+online: false
 permalink: /talks/2022-10-11-bound-preserving-entropy-stable-and-well
 ---

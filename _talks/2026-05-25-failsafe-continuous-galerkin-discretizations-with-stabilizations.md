@@ -6,5 +6,6 @@ venue: "HYP2026: Hyperbolic Problems: Theory, Numerics and Applications"
 date: 2026-05-25
 location: "Stuttgart, Germany"
 city: "Stuttgart"
+online: false
 permalink: /talks/2026-05-25-failsafe-continuous-galerkin-discretizations-with-stabilizations
 ---

@@ -6,5 +6,6 @@ venue: "WCCM-ECCOMAS: 17th World Congress on Computational Mechanics & 10th Euro
 date: 2026-07-20
 location: "Munich, Germany"
 city: "Munich"
+online: false
 permalink: /talks/2026-07-20-a-property-preserving-second-order-scheme
 ---

@@ -6,5 +6,6 @@ venue: "Mechanics Research Group, University of Oslo"
 date: 2023-12-01
 location: "Oslo, Norway"
 city: "Oslo"
+online: false
 permalink: /talks/2023-12-01-property-preserving-finite-element-methods-for
 ---

@@ -6,5 +6,6 @@ venue: "Chair of Applied Mathematics and Numerics, TU Dortmund University"
 date: 2023-12-21
 location: "Dortmund, Germany"
 city: "Dortmund"
+online: false
 permalink: /talks/2023-12-21-the-effects-of-bottom-topography-on
 ---
