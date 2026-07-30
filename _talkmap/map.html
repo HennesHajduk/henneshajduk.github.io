@@ -7,38 +7,49 @@
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<link rel="stylesheet" href="leaflet_dist/screen.css" />
-
     	<link rel="stylesheet" href="leaflet_dist/MarkerCluster.css" />
     	<link rel="stylesheet" href="leaflet_dist/MarkerCluster.Default.css" />
     	<script src="leaflet_dist/leaflet.markercluster-src.js"></script>
     	<script src="org-locations.js"></script>
-
+    	<style>
+    		/* Deliberately NOT using leaflet_dist/screen.css's fixed 800x600 --
+    		   #map fills whatever box the embedding page gives it (see the
+    		   iframe in pages/talk_map.html), and the JS below computes the
+    		   exact zoom to fill that box with no leftover grey margin. */
+    		html, body { margin: 0; padding: 0; height: 100%; }
+    		#map {
+    			width: 100%;
+    			height: 100%;
+    			border: none;
+    		}
+    	</style>
     </head>
     <body>
 
         <div id="map"></div>
-        <p style="margin-top: 20px;">Each numbered circle is a cluster of nearby talks. Hover over one to see the area it covers, or click it to zoom in and split it into individual markers.</p>
     	<script type="text/javascript">
     		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
               maxZoom: 18,
               noWrap: true,
               attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-                    }),
-    			latlng = L.latLng(0, 10);
-    		// At zoom 1 the whole world tile grid is 512x512px, which fits inside
-    		// the 800x600 #map box without cropping. minZoom pins this as the
-    		// floor so you can never zoom out into a smaller, cropped world; the
-    		// world bounds stop panning from wrapping into repeated copies.
+                    });
+    		// A full 360x180 Mercator view is always square (grey margins are
+    		// unavoidable in a wide box); cropping the polar ocean/ice down to
+    		// a -55..78 latitude band -- still covering every talk location --
+    		// gives a naturally wide, gapless view instead.
+    		var viewBounds = L.latLngBounds(L.latLng(-55, -180), L.latLng(78, 180));
     		var worldBounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
     		var map = L.map('map', {
-    			center: latlng,
-    			zoom: 1,
-    			minZoom: 1,
     			layers: [tiles],
+    			zoomSnap: 0, // allow a fractional zoom so the fit below is exact, not rounded
     			maxBounds: worldBounds,
     			maxBoundsViscosity: 1.0
     		});
+    		map.fitBounds(viewBounds);
+    		// Lock the zoom you get from fitBounds as the floor: zooming out
+    		// further would only reintroduce grey margins or, at the true
+    		// world zoom, force a square-shaped view.
+    		map.setMinZoom(map.getZoom());
     		var markers = L.markerClusterGroup({
     			showCoverageOnHover: false,
     			maxClusterRadius: 80
