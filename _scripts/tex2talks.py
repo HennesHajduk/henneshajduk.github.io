@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Convert Hennes' LaTeX CV talk lists into _talks/*.md files for Jekyll."""
+"""Convert LaTeX CV talk lists into _talks/*.md files for Jekyll."""
 
 import re
 import unicodedata
@@ -123,16 +123,25 @@ def strip_comments(text):
     return "\n".join(line for line in text.splitlines() if not line.lstrip().startswith("%"))
 
 
+ONLINE_RE = re.compile(r"\s*\(online\)\s*", re.IGNORECASE)
+
+
+def strip_online(location):
+    """Split an "(online)" marker out of a cleaned location string."""
+    online = bool(ONLINE_RE.search(location))
+    return ONLINE_RE.sub("", location).strip(), online
+
+
 def resolve_seminar_place(institute, raw_location):
-    location = clean_latex(raw_location)
+    location, online = strip_online(clean_latex(raw_location))
     if "," in location:
-        return location, location.split(",")[0].strip()
+        return location, location.split(",")[0].strip(), online
     city = next((c for kw, c in SEMINAR_CITY_OVERRIDES if kw in institute), None)
     if city is None:
         print(f"warning: no city known for seminar host {institute!r} (location is just {location!r}); "
               f"add an entry to SEMINAR_CITY_OVERRIDES")
         city = location
-    return f"{city}, {location}", city
+    return f"{city}, {location}", city, online
 
 
 def conf_entries():
@@ -145,7 +154,7 @@ def conf_entries():
             abbrev, full_name, raw_location, raw_date, raw_title = args
             venue_name = f"{clean_latex(abbrev)}: {clean_latex(full_name)}"
 
-        location = clean_latex(raw_location)
+        location, online = strip_online(clean_latex(raw_location))
         city = location.split(",")[0].strip()
         yield {
             "title": clean_latex(raw_title),
@@ -154,6 +163,7 @@ def conf_entries():
             "location": location,
             "city": city,
             "date": parse_conf_date(raw_date),
+            "online": online,
         }
 
 
@@ -162,7 +172,7 @@ def seminar_entries():
     for name, args in find_macro_calls(text, ["seminar"]):
         raw_title, raw_institute, raw_location, raw_date = args
         institute = clean_latex(raw_institute)
-        location, city = resolve_seminar_place(institute, raw_location)
+        location, city, online = resolve_seminar_place(institute, raw_location)
         yield {
             "title": clean_latex(raw_title),
             "type": "Invited seminar",
@@ -170,6 +180,7 @@ def seminar_entries():
             "location": location,
             "city": city,
             "date": parse_seminar_date(raw_date),
+            "online": online,
         }
 
 
@@ -194,6 +205,7 @@ def write_talk(entry, seen_slugs):
         f"date: {entry['date'].isoformat()}",
         f"location: {yaml_str(entry['location'])}",
         f"city: {yaml_str(entry['city'])}",
+        f"online: {'true' if entry['online'] else 'false'}",
         f"permalink: {permalink}",
         "---",
         "",
@@ -202,11 +214,16 @@ def write_talk(entry, seen_slugs):
     with open(f"{OUTPUT_DIR}/{key}.md", "w") as f:
         f.write(front_matter)
 
+    # if entry["online"]:
+    #     print(f"  {key}: online talk")
+
 
 if __name__ == "__main__":
     seen = set()
     count = 0
+    online_count = 0
     for entry in list(conf_entries()) + list(seminar_entries()):
         write_talk(entry, seen)
         count += 1
-    print(f"wrote {count} talk files to {OUTPUT_DIR}/")
+        online_count += entry["online"]
+    print(f"wrote {count} talk files to {OUTPUT_DIR}/ ({online_count} online)")
