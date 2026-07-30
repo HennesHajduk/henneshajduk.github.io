@@ -60,9 +60,10 @@
     			markers.addLayer(marker);
     		}
     		map.addLayer(markers);
-    		// Fit the view to the whole world instead of a hand-tuned fractional
-    		// zoom, so the map always looks right regardless of container size.
-    		map.fitWorld();
+    		// Fixed, closer-in zoom (similar to the original) rather than
+    		// fitWorld(), which zoomed out too far to fit a wide/short box.
+    		// noWrap + maxBounds above keep this from repeating horizontally.
+    		map.setView(L.latLng(20, 10), 2);
     	</script>
     </body>
     </html>
