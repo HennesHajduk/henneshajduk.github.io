@@ -13,41 +13,19 @@
     	<link rel="stylesheet" href="leaflet_dist/MarkerCluster.Default.css" />
     	<script src="leaflet_dist/leaflet.markercluster-src.js"></script>
     	<script src="org-locations.js"></script>
-    	<style>
-    		html, body { margin: 0; padding: 0; }
-    		/* Override the fixed 800x600 from screen.css so the map fills the
-    		   width of its container instead of leaving dead space on the sides. */
-    		#map {
-    			width: 100%;
-    			height: 600px;
-    			border: none;
-    		}
-    		.leaflet-popup-content {
-    			line-height: 1.4;
-    		}
-    		p.map-caption {
-    			margin: 8px 12px;
-    			font-family: sans-serif;
-    			font-size: 0.9em;
-    		}
-    	</style>
+
     </head>
     <body>
 
         <div id="map"></div>
-        <p class="map-caption">Each numbered circle is a cluster of nearby talks. Hover over one to see the area it covers, or click it to zoom in and split it into individual markers.</p>
+        <p style="margin-top: 20px;">Each numbered circle is a cluster of nearby talks. Hover over one to see the area it covers, or click it to zoom in and split it into individual markers.</p>
     	<script type="text/javascript">
     		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
               maxZoom: 18,
-              noWrap: true,
               attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-                    });
-    		var worldBounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
-    		var map = L.map('map', {
-    			layers: [tiles],
-    			maxBounds: worldBounds,
-    			maxBoundsViscosity: 1.0
-    		});
+                    }),
+    			latlng = L.latLng(30, 10);
+    		var map = L.map('map', {center: latlng, zoom: 0.7, layers: [tiles]});
     		var markers = L.markerClusterGroup({
     			showCoverageOnHover: false,
     			maxClusterRadius: 80
@@ -60,10 +38,7 @@
     			markers.addLayer(marker);
     		}
     		map.addLayer(markers);
-    		// Fixed, closer-in zoom (similar to the original) rather than
-    		// fitWorld(), which zoomed out too far to fit a wide/short box.
-    		// noWrap + maxBounds above keep this from repeating horizontally.
-    		map.setView(L.latLng(20, 10), 2);
+    		map.zoomIn();
     	</script>
     </body>
     </html>
