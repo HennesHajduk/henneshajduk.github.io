@@ -39,9 +39,15 @@
     	<script type="text/javascript">
     		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
               maxZoom: 18,
+              noWrap: true,
               attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
                     });
-    		var map = L.map('map', {layers: [tiles]});
+    		var worldBounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
+    		var map = L.map('map', {
+    			layers: [tiles],
+    			maxBounds: worldBounds,
+    			maxBoundsViscosity: 1.0
+    		});
     		var markers = L.markerClusterGroup({
     			showCoverageOnHover: false,
     			maxClusterRadius: 80

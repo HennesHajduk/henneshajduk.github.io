@@ -55,8 +55,9 @@ for file in g:
     venue = data['venue'].strip()
     location = data['location'].strip()
     city = data.get('city', location.split(',')[0]).strip()
+    country = location.rsplit(',', 1)[-1].strip()
     month_year = data['date'].strftime('%b %Y')
-    description = f"<strong>{title}</strong><br>{month_year}<br>{venue}<br>{city}"
+    description = f"<strong>{title}</strong><br>{month_year}<br>{venue}<br>{city}, {country}"
     if data.get('online'):
         description += "<br><em>(online)</em>"
 
