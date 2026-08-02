@@ -82,15 +82,15 @@ ax.set_axis_off()
 plt.savefig("../images/map.pdf", dpi=dpi, bbox_inches=None, pad_inches=0)
 
 # Web copy: the talk map (Leaflet imageOverlay) caps its max zoom at this
-# image's native pixel width (see _scripts/talkmap_assets/map.html), where
-# nativeZoom = log2(width / 256). Each doubling of width buys one more zoom
-# level, so going from 200 to 800 dpi (4000x2000 -> 16000x8000 px, a 4x
-# width increase) buys log2(4) = 2 full zoom levels versus the previous
-# version, without upsampling: native ETOPO 60" resolution is 21600x10800,
-# comfortably above 16000x8000. JPEG instead of PNG keeps the file size
-# sane since this is a continuous-tone image with no sharp edges or
-# transparency to lose.
-fig.savefig("../images/map.jpg", dpi=800, bbox_inches=None, pad_inches=0,
+# image's native pixel width (see _scripts/talkmap_assets/map.html). Using
+# the full native ETOPO 60" resolution (21600x10800, i.e. 1080 dpi at
+# 20x10 in) maximizes zoom depth with zero upsampling -- this is the most
+# this source data can give without interpolating pixels that aren't
+# really there. Going further would need a finer-resolution elevation
+# grid (e.g. ETOPO 2022's 15" or 30" product). JPEG instead of PNG keeps
+# the file size sane since this is a continuous-tone image with no sharp
+# edges or transparency to lose.
+fig.savefig("../images/map.jpg", dpi=1080, bbox_inches=None, pad_inches=0,
             pil_kwargs={"quality": 88, "optimize": True})
 
 plt.show()
