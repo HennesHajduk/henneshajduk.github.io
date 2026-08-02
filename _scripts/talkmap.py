@@ -8,6 +8,7 @@
 import frontmatter
 import glob
 import re
+import shutil
 import time
 import getorg
 from geopy import Nominatim
@@ -82,3 +83,9 @@ for file in g:
 # Save the map
 m = getorg.orgmap.create_map_obj()
 getorg.orgmap.output_html_cluster_map(location_dict, folder_name="_talkmap", hashed_usernames=False)
+
+# getorg writes its own default map.html/screen.css (Mercator tiles, fixed
+# 800x600 box) on every run; overwrite them with our customized versions
+# (single non-repeating image basemap, capped zoom, no grey box).
+shutil.copyfile("_scripts/talkmap_assets/map.html", "_talkmap/map.html")
+shutil.copyfile("_scripts/talkmap_assets/screen.css", "_talkmap/leaflet_dist/screen.css")

@@ -6,7 +6,9 @@ author_profile: true
 ---
 
 <p>Here you can see the locations, times, and occasions where I have given scientific presentations.</p>
-<iframe src="/_talkmap/map.html" height="700" width="850" style="border:none;"></iframe>
+<div style="max-width: 900px; aspect-ratio: 2 / 1;">
+  <iframe src="/_talkmap/map.html" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
 <p style="margin-top: 10px;">Each numbered circle is a cluster of nearby talks. Hover over one to see the area it covers, or click it to zoom in and split it into individual markers.</p>
 
-<p style="margin-top: 30px;">This map is generated from a Jupyter Notebook provided in the <a href="https://github.com/academicpages/academicpages.github.io">GitHub AcademicPages Template</a>.</p>
+<p style="margin-top: 30px;">The talk-location data is scraped from this site's talk pages by a Jupyter Notebook, and the interactive map itself is generated with the <a href="https://github.com/Leaflet/Leaflet.markercluster">Leaflet.markercluster</a> plugin via the <a href="https://github.com/andrewheiss/getorg">getorg</a> library, following the approach from the <a href="https://github.com/academicpages/academicpages.github.io">GitHub AcademicPages Template</a>. The basemap image is derived from <a href="https://doi.org/10.25921/fd45-gt74">ETOPO 2022</a> global relief data (NOAA National Centers for Environmental Information).</p>
