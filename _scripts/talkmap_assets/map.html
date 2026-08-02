@@ -62,30 +62,47 @@
 
 		// Cap zooming in at the basemap image's native pixel resolution, so
 		// the browser is never asked to upscale (and blur) it beyond 1:1.
+		//
+		// Marker clustering is set up inside this same handler, after
+		// setMaxZoom(): Leaflet.markercluster reads map.getMaxZoom() exactly
+		// once, the first time markers are added (_generateInitialClusters),
+		// and bakes it into its internal clustering grid. Adding markers
+		// before this handler ran would bake in the placeholder maxZoom of
+		// 12, so clusters that only separate somewhere past the basemap's
+		// real ~5-6 zoom ceiling would stay stuck together forever, with no
+		// way to zoom in further to split or click them.
 		overlay.once('load', function () {
 			var img = overlay.getElement();
 			var p0 = map.project(worldBounds.getSouthWest(), 0);
 			var p1 = map.project(worldBounds.getNorthEast(), 0);
 			var worldWidthAtZoom0 = Math.abs(p1.x - p0.x);
 			var nativeZoom = Math.log2(img.naturalWidth / worldWidthAtZoom0);
-			map.setMaxZoom(Math.max(nativeZoom, map.getMinZoom()));
+			// Leaflet.markercluster indexes its internal clustering grid by
+			// zoom level and assumes those are integers; a fractional
+			// maxZoom makes one of its loops walk past its lowest grid key
+			// and crash (silently killing all marker rendering). Floor it
+			// so clustering stays sane -- zoomSnap: 0 still gives smooth,
+			// continuous zoom/pan below this integer ceiling, we just don't
+			// reach the last fractional sliver of native resolution.
+			var effectiveMaxZoom = Math.max(Math.floor(nativeZoom), Math.ceil(map.getMinZoom()));
+			map.setMaxZoom(effectiveMaxZoom);
+
+			var markers = L.markerClusterGroup({
+				showCoverageOnHover: false,
+				maxClusterRadius: 80
+			});
+			for (var i = 0; i < addressPoints.length; i++) {
+				var a = addressPoints[i];
+				var title = a[0];
+				var marker = L.marker(new L.LatLng(a[1], a[2]), { title: title });
+				marker.bindPopup(title);
+				markers.addLayer(marker);
+			}
+			map.addLayer(markers);
 		});
 		window.addEventListener('resize', function () {
 			map.invalidateSize();
 		});
-
-		var markers = L.markerClusterGroup({
-			showCoverageOnHover: false,
-			maxClusterRadius: 80
-		});
-		for (var i = 0; i < addressPoints.length; i++) {
-			var a = addressPoints[i];
-			var title = a[0];
-			var marker = L.marker(new L.LatLng(a[1], a[2]), { title: title });
-			marker.bindPopup(title);
-			markers.addLayer(marker);
-		}
-		map.addLayer(markers);
 	</script>
 </body>
 </html>
