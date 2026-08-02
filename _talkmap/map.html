@@ -87,9 +87,14 @@
 			var effectiveMaxZoom = Math.max(Math.floor(nativeZoom), Math.ceil(map.getMinZoom()));
 			map.setMaxZoom(effectiveMaxZoom);
 
+			// A smaller radius than the plugin default (80px) so that
+			// genuinely distinct places (e.g. Dresden/Prague, ~54px apart
+			// at our current max zoom) render as separate markers, while
+			// same-metro-area duplicates stay merged. Picked empirically
+			// against this site's actual talk locations.
 			var markers = L.markerClusterGroup({
 				showCoverageOnHover: false,
-				maxClusterRadius: 80
+				maxClusterRadius: 50
 			});
 			for (var i = 0; i < addressPoints.length; i++) {
 				var a = addressPoints[i];
