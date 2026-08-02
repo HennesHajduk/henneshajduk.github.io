@@ -35,7 +35,7 @@
 			worldCopyJump: false
 		});
 
-		L.imageOverlay('/images/map.png', worldBounds, {
+		var overlay = L.imageOverlay('/images/map.jpg', worldBounds, {
 			attribution: 'Basemap derived from <a href="https://doi.org/10.25921/fd45-gt74">ETOPO 2022</a> (NOAA NCEI)'
 		}).addTo(map);
 
@@ -45,13 +45,23 @@
 		function fitToCover() {
 			var minZoom = map.getBoundsZoom(worldBounds, true);
 			map.setMinZoom(minZoom);
-			map.setMaxZoom(minZoom + 6);
 			if (map.getZoom() < minZoom) {
 				map.setView([0, 0], minZoom);
 			}
 		}
 		fitToCover();
 		map.on('resize', fitToCover);
+
+		// Cap zooming in at the basemap image's native pixel resolution, so
+		// the browser is never asked to upscale (and blur) it beyond 1:1.
+		overlay.once('load', function () {
+			var img = overlay.getElement();
+			var p0 = map.project(worldBounds.getSouthWest(), 0);
+			var p1 = map.project(worldBounds.getNorthEast(), 0);
+			var worldWidthAtZoom0 = Math.abs(p1.x - p0.x);
+			var nativeZoom = Math.log2(img.naturalWidth / worldWidthAtZoom0);
+			map.setMaxZoom(Math.max(nativeZoom, map.getMinZoom()));
+		});
 		window.addEventListener('resize', function () {
 			map.invalidateSize();
 		});

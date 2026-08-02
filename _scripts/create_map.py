@@ -81,10 +81,15 @@ ax.imshow( S_land, extent=[bounds.left, bounds.right, bounds.bottom, bounds.top]
 ax.set_axis_off()
 plt.savefig("../images/map.pdf", dpi=dpi, bbox_inches=None, pad_inches=0)
 
-# Web copy: the talk map (Leaflet imageOverlay) needs a raster format, and
-# 300 dpi would be an 8+ MB page asset for no visible benefit at typical
-# zoom levels, so re-render at a size that stays crisp on screen.
-fig.savefig("../images/map.png", dpi=100, bbox_inches=None, pad_inches=0)
+# Web copy: the talk map (Leaflet imageOverlay) caps its max zoom at this
+# image's native pixel width (see _scripts/talkmap_assets/map.html), so
+# resolution here is a direct trade-off against how far a visitor can zoom
+# in before the basemap starts to blur. 200 dpi (4000x2000 px) gives a
+# couple of zoom levels of headroom over the fully-zoomed-out view. JPEG
+# instead of PNG keeps the file size sane (~1.2 MB vs ~7.5 MB) since this
+# is a continuous-tone image with no sharp edges or transparency to lose.
+fig.savefig("../images/map.jpg", dpi=200, bbox_inches=None, pad_inches=0,
+            pil_kwargs={"quality": 88, "optimize": True})
 
 plt.show()
 plt.close()
