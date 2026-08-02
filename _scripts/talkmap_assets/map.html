@@ -4,8 +4,8 @@
 <head>
 	<title>Talk map</title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="leaflet_dist/screen.css" />
 
@@ -29,6 +29,10 @@
 			crs: L.CRS.EPSG4326,
 			center: [0, 0],
 			zoom: 0,
+			// Leaflet.markercluster needs a maxZoom at map-creation time for
+			// its internal clustering grid; this placeholder is tightened to
+			// the basemap's native resolution once it loads (see below).
+			maxZoom: 12,
 			maxBounds: worldBounds,
 			maxBoundsViscosity: 1.0,
 			zoomSnap: 0,
