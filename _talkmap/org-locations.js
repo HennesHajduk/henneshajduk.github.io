@@ -146,8 +146,8 @@ var addressPoints = [
   ],
   [
     "<strong>Property-preserving discontinuous Galerkin methods for hyperbolic conservation laws</strong><br>Aug 2021<br>Banff International Research Station for Mathematical Innovation and Discovery: Bound-Preserving Space and Time Discretizations for Convection-Dominated Problems<br>Casa Matem\u00e1tica Oaxaca, Mexico<br><em>(online)</em>",
-    23.6585116,
-    -102.0077097
+    17.0,
+    -96.5
   ],
   [
     "<strong>Modified shallow-water equations for direct bathymetry reconstruction</strong><br>Dec 2017<br>Numerical Methods for Shallow Water Equations and Related Models<br>Shenzhen, China",
