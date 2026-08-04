@@ -76,7 +76,10 @@
 		// Country borders as a vector overlay rather than baked into the
 		// raster: stays crisp at any zoom level, and lines up directly with
 		// this map's plate-carree CRS (plain lat/lon, no reprojection)
-		// since the source data (Natural Earth 1:110m admin-0 countries) is
+		// since the source data (Natural Earth 1:50m admin-0 countries,
+		// picked over the coarser 1:110m for borders fine enough to track
+		// the coastline detail at max zoom, and over the much heavier 1:10m
+		// which is overkill given this basemap's own resolution ceiling) is
 		// already WGS84. Also drawn shifted +/-360 degrees to match the
 		// ghost basemap copies in the edge-panning margin.
 		fetch('countries.geojson')
@@ -144,12 +147,16 @@
 				showCoverageOnHover: false,
 				maxClusterRadius: 25
 			});
+			// 25% wider than Leaflet's default 300px maxWidth, so the long
+			// talk titles/venues wrap into fewer, longer lines instead of a
+			// tall narrow column.
+			var popupOptions = { maxWidth: 375 };
 			for (var i = 0; i < addressPoints.length; i++) {
 				var a = addressPoints[i];
 				var title = a[0];
 				var lat = a[1], lon = a[2];
 				var marker = L.marker(new L.LatLng(lat, lon), { title: title });
-				marker.bindPopup(title);
+				marker.bindPopup(title, popupOptions);
 				markers.addLayer(marker);
 
 				// Ghost marker in the edge-panning margin (see panBounds
@@ -163,7 +170,7 @@
 				}
 				if (ghostLon !== null) {
 					var ghostMarker = L.marker(new L.LatLng(lat, ghostLon), { title: title });
-					ghostMarker.bindPopup(title);
+					ghostMarker.bindPopup(title, popupOptions);
 					markers.addLayer(ghostMarker);
 				}
 			}
