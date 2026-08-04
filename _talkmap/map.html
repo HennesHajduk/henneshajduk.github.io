@@ -29,34 +29,21 @@
 		// wrap-around or distortion.
 		var worldBounds = L.latLngBounds([-90, -180], [90, 180]);
 
-		// This basemap is a single static image, not an infinitely-tiled
-		// layer, so it can't wrap seamlessly like a normal web map. Instead
-		// we allow a bounded amount of panning past +/-180 degrees, showing
-		// a repeated copy of the world in that margin, so talks near one
-		// edge (e.g. Japan/China) are directly reachable from talks near
-		// the other (e.g. Hawaii/US west coast) without panning the long
-		// way around through Europe/the Atlantic. 70 degrees comfortably
-		// covers the ~64 degree Pacific gap between this site's easternmost
-		// (Yokohama, ~140E) and westernmost (Maui, ~156W) talks, with a
-		// little headroom for future additions.
-		var EDGE_BUFFER_DEG = 70;
-
-		// Separately, at this map's default (most zoomed-out) view the
-		// container shows exactly -90..90 latitude with zero margin (width
-		// and height both bind at once, since the container's 2:1 aspect
-		// matches the world's). A popup opened above a high-latitude marker
-		// needs room north of it to render, and Leaflet's autoPan can't
-		// create that room if maxBounds is locked to exactly +/-90 -- it
-		// has nowhere further to pan, so the popup renders clipped off the
-		// top of the map instead (confirmed for Lappeenranta, our
-		// northernmost talk at 61N). There's no real land/imagery past the
-		// poles to show, so this buffer is just blank autoPan headroom, not
-		// a ghost copy like the longitude one above. 50 degrees covers
+		// At this map's default (most zoomed-out) view the container shows
+		// exactly -90..90 latitude with zero margin (width and height both
+		// bind at once, since the container's 2:1 aspect matches the
+		// world's). A popup opened above a high-latitude marker needs room
+		// north of it to render, and Leaflet's autoPan can't create that
+		// room if maxBounds is locked to exactly +/-90 -- it has nowhere
+		// further to pan, so the popup renders clipped off the top of the
+		// map instead (confirmed for Lappeenranta, our northernmost talk at
+		// 61N). There's no real land/imagery past the poles to show, so
+		// this buffer is just blank autoPan headroom. 50 degrees covers
 		// Lappeenranta with room for talks somewhat further north too.
 		var LAT_BUFFER_DEG = 50;
 		var panBounds = L.latLngBounds(
-			[-90 - LAT_BUFFER_DEG, -180 - EDGE_BUFFER_DEG],
-			[90 + LAT_BUFFER_DEG, 180 + EDGE_BUFFER_DEG]
+			[-90 - LAT_BUFFER_DEG, -180],
+			[90 + LAT_BUFFER_DEG, 180]
 		);
 
 		var map = L.map('map', {
@@ -77,16 +64,6 @@
 			attribution: 'Basemap derived from <a href="https://doi.org/10.25921/fd45-gt74">ETOPO 2022</a> (NOAA NCEI)'
 		}).addTo(map);
 
-		// Ghost copies of the same image (same cached URL, no extra
-		// download) shifted a full world-width east/west, so the buffer
-		// margin shows continuous repeated terrain instead of blank space.
-		L.imageOverlay('/images/map.jpg', L.latLngBounds(
-			[-90, worldBounds.getWest() - 360], [90, worldBounds.getEast() - 360]
-		)).addTo(map);
-		L.imageOverlay('/images/map.jpg', L.latLngBounds(
-			[-90, worldBounds.getWest() + 360], [90, worldBounds.getEast() + 360]
-		)).addTo(map);
-
 		// Country borders as a vector overlay rather than baked into the
 		// raster: stays crisp at any zoom level, and lines up directly with
 		// this map's plate-carree CRS (plain lat/lon, no reprojection)
@@ -94,19 +71,13 @@
 		// picked over the coarser 1:110m for borders fine enough to track
 		// the coastline detail at max zoom, and over the much heavier 1:10m
 		// which is overkill given this basemap's own resolution ceiling) is
-		// already WGS84. Also drawn shifted +/-360 degrees to match the
-		// ghost basemap copies in the edge-panning margin.
+		// already WGS84.
 		fetch('countries.geojson')
 			.then(function (r) { return r.json(); })
 			.then(function (data) {
-				[0, -360, 360].forEach(function (shift) {
-					L.geoJSON(data, {
-						style: { color: '#000', weight: 1, fill: false },
-						coordsToLatLng: function (coords) {
-							return L.latLng(coords[1], coords[0] + shift);
-						}
-					}).addTo(map);
-				});
+				L.geoJSON(data, {
+					style: { color: '#000', weight: 1, fill: false }
+				}).addTo(map);
 			});
 
 		// Fit the image to fully cover the container (no letterboxing), and
@@ -168,25 +139,9 @@
 			for (var i = 0; i < addressPoints.length; i++) {
 				var a = addressPoints[i];
 				var title = a[0];
-				var lat = a[1], lon = a[2];
-				var marker = L.marker(new L.LatLng(lat, lon), { title: title });
+				var marker = L.marker(new L.LatLng(a[1], a[2]), { title: title });
 				marker.bindPopup(title, popupOptions);
 				markers.addLayer(marker);
-
-				// Ghost marker in the edge-panning margin (see panBounds
-				// above), so talks near +/-180 degrees are clickable from
-				// the buffer side too, not just their "native" position.
-				var ghostLon = null;
-				if (lon > 180 - EDGE_BUFFER_DEG) {
-					ghostLon = lon - 360;
-				} else if (lon < -180 + EDGE_BUFFER_DEG) {
-					ghostLon = lon + 360;
-				}
-				if (ghostLon !== null) {
-					var ghostMarker = L.marker(new L.LatLng(lat, ghostLon), { title: title });
-					ghostMarker.bindPopup(title, popupOptions);
-					markers.addLayer(ghostMarker);
-				}
 			}
 			map.addLayer(markers);
 		});
