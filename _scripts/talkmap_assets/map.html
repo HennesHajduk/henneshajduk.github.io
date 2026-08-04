@@ -29,6 +29,22 @@
 		// wrap-around or distortion.
 		var worldBounds = L.latLngBounds([-90, -180], [90, 180]);
 
+		// This basemap is a single static image, not an infinitely-tiled
+		// layer, so it can't wrap seamlessly like a normal web map. Instead
+		// we allow a bounded amount of panning past +/-180 degrees, showing
+		// a repeated copy of the world in that margin, so talks near one
+		// edge (e.g. Japan/China) are directly reachable from talks near
+		// the other (e.g. Hawaii/US west coast) without panning the long
+		// way around through Europe/the Atlantic. 70 degrees comfortably
+		// covers the ~64 degree Pacific gap between this site's easternmost
+		// (Yokohama, ~140E) and westernmost (Maui, ~156W) talks, with a
+		// little headroom for future additions.
+		var EDGE_BUFFER_DEG = 70;
+		var panBounds = L.latLngBounds(
+			[-90, -180 - EDGE_BUFFER_DEG],
+			[90, 180 + EDGE_BUFFER_DEG]
+		);
+
 		var map = L.map('map', {
 			crs: L.CRS.EPSG4326,
 			center: [0, 0],
@@ -37,7 +53,7 @@
 			// its internal clustering grid; this placeholder is tightened to
 			// the basemap's native resolution once it loads (see below).
 			maxZoom: 12,
-			maxBounds: worldBounds,
+			maxBounds: panBounds,
 			maxBoundsViscosity: 1.0,
 			zoomSnap: 0, // continuous fractional zoom, not just whole levels
 			worldCopyJump: false
@@ -46,6 +62,35 @@
 		var overlay = L.imageOverlay('/images/map.jpg', worldBounds, {
 			attribution: 'Basemap derived from <a href="https://doi.org/10.25921/fd45-gt74">ETOPO 2022</a> (NOAA NCEI)'
 		}).addTo(map);
+
+		// Ghost copies of the same image (same cached URL, no extra
+		// download) shifted a full world-width east/west, so the buffer
+		// margin shows continuous repeated terrain instead of blank space.
+		L.imageOverlay('/images/map.jpg', L.latLngBounds(
+			[-90, worldBounds.getWest() - 360], [90, worldBounds.getEast() - 360]
+		)).addTo(map);
+		L.imageOverlay('/images/map.jpg', L.latLngBounds(
+			[-90, worldBounds.getWest() + 360], [90, worldBounds.getEast() + 360]
+		)).addTo(map);
+
+		// Country borders as a vector overlay rather than baked into the
+		// raster: stays crisp at any zoom level, and lines up directly with
+		// this map's plate-carree CRS (plain lat/lon, no reprojection)
+		// since the source data (Natural Earth 1:110m admin-0 countries) is
+		// already WGS84. Also drawn shifted +/-360 degrees to match the
+		// ghost basemap copies in the edge-panning margin.
+		fetch('countries.geojson')
+			.then(function (r) { return r.json(); })
+			.then(function (data) {
+				[0, -360, 360].forEach(function (shift) {
+					L.geoJSON(data, {
+						style: { color: '#000', weight: 1, fill: false },
+						coordsToLatLng: function (coords) {
+							return L.latLng(coords[1], coords[0] + shift);
+						}
+					}).addTo(map);
+				});
+			});
 
 		// Fit the image to fully cover the container (no letterboxing), and
 		// forbid zooming out past that, so the globe always fills the map
@@ -88,20 +133,39 @@
 			map.setMaxZoom(effectiveMaxZoom);
 
 			// A smaller radius than the plugin default (80px) so that
-			// genuinely distinct places (e.g. Dresden/Prague, ~54px apart
-			// at our current max zoom) render as separate markers, while
-			// same-metro-area duplicates stay merged. Picked empirically
-			// against this site's actual talk locations.
+			// genuinely distinct places render as separate markers, while
+			// same-venue duplicates (identical coordinates) stay merged.
+			// Checked against this site's actual talk locations: excluding
+			// exact-coordinate duplicates (0px apart), the closest distinct
+			// pair is ~37px apart at our current max zoom, so anything
+			// under that -- 25px -- separates every genuinely distinct
+			// place with room to spare for future geocoding jitter.
 			var markers = L.markerClusterGroup({
 				showCoverageOnHover: false,
-				maxClusterRadius: 50
+				maxClusterRadius: 25
 			});
 			for (var i = 0; i < addressPoints.length; i++) {
 				var a = addressPoints[i];
 				var title = a[0];
-				var marker = L.marker(new L.LatLng(a[1], a[2]), { title: title });
+				var lat = a[1], lon = a[2];
+				var marker = L.marker(new L.LatLng(lat, lon), { title: title });
 				marker.bindPopup(title);
 				markers.addLayer(marker);
+
+				// Ghost marker in the edge-panning margin (see panBounds
+				// above), so talks near +/-180 degrees are clickable from
+				// the buffer side too, not just their "native" position.
+				var ghostLon = null;
+				if (lon > 180 - EDGE_BUFFER_DEG) {
+					ghostLon = lon - 360;
+				} else if (lon < -180 + EDGE_BUFFER_DEG) {
+					ghostLon = lon + 360;
+				}
+				if (ghostLon !== null) {
+					var ghostMarker = L.marker(new L.LatLng(lat, ghostLon), { title: title });
+					ghostMarker.bindPopup(title);
+					markers.addLayer(ghostMarker);
+				}
 			}
 			map.addLayer(markers);
 		});

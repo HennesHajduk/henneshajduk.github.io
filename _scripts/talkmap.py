@@ -20,6 +20,16 @@ TIMEOUT = 5
 # Nominatim's usage policy caps requests at 1/second
 RATE_LIMIT_SECONDS = 1
 
+# Manual corrections for locations Nominatim can't resolve well on its own.
+# geocode_with_fallback() strips down to a less specific query on failure,
+# which can land on something technically valid but far too coarse -- e.g.
+# "Casa Matemática Oaxaca, Mexico" fails outright, falls back all the way to
+# just "Mexico", and geocodes to the whole country's centroid instead of the
+# actual city of Oaxaca.
+GEOCODE_OVERRIDES = {
+    "Casa Matemática Oaxaca, Mexico": "Oaxaca, Mexico",
+}
+
 # Collect the Markdown files
 g = glob.glob("_talks/*.md")
 
@@ -64,6 +74,7 @@ for file in g:
 
     # Strip trailing "(online)"-style annotations before geocoding
     geocode_query = re.sub(r"\s*\([^)]*\)\s*$", "", location)
+    geocode_query = GEOCODE_OVERRIDES.get(location, geocode_query)
 
     # Geocode the location and report the status
     try:
@@ -89,3 +100,4 @@ getorg.orgmap.output_html_cluster_map(location_dict, folder_name="_talkmap", has
 # (single non-repeating image basemap, capped zoom, no grey box).
 shutil.copyfile("_scripts/talkmap_assets/map.html", "_talkmap/map.html")
 shutil.copyfile("_scripts/talkmap_assets/screen.css", "_talkmap/leaflet_dist/screen.css")
+shutil.copyfile("_scripts/talkmap_assets/countries.geojson", "_talkmap/countries.geojson")
