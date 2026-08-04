@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
+import json
 import rasterio
 from rasterio.enums import Resampling
+from rasterio.features import rasterize
+from rasterio.transform import from_bounds
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
@@ -48,8 +51,29 @@ S = np.sqrt(dh_dx**2 + dh_dy**2)
 # Mask poles
 S[np.abs(Lat_topo) > 89.5] = np.nan
 
-land_mask = topo_coarse > 0
-water_mask = topo_coarse < 0
+# Land/water from elevation sign alone misclassifies below-sea-level dry
+# land (Netherlands polders, Death Valley, the Caspian/Qattara/Turpan
+# depressions, ...) as ocean. Use Natural Earth's land polygon instead --
+# curated specifically for this distinction, unlike "inside a country"
+# (which would wrongly swallow the Caspian Sea, Great Lakes, etc. as
+# land). The land polygon alone still doesn't cut out major lakes at this
+# simplification level (verified: Lake Superior/Michigan render as solid
+# land in ne_50m_land, apparently merged into the continental outline),
+# so lakes.geojson is subtracted separately. Both are 1:50m, matching the
+# resolution already used for the on-map country borders; these files are
+# build-time-only inputs (never shipped to the web map), so their size
+# isn't a page-weight concern.
+land_transform = from_bounds(bounds.left, bounds.bottom, bounds.right, bounds.top, new_width, new_height)
+
+def rasterize_geojson(path):
+    with open(path) as f:
+        shapes = [feat["geometry"] for feat in json.load(f)["features"]]
+    return rasterize(
+        shapes, out_shape=(new_height, new_width), transform=land_transform, fill=0, dtype="uint8"
+    ).astype(bool)
+
+land_mask = rasterize_geojson("land.geojson") & ~rasterize_geojson("lakes.geojson")
+water_mask = ~land_mask
 
 S_land = np.where(land_mask, S, np.nan)
 S_water = np.where(water_mask, S, np.nan)

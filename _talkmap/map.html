@@ -40,9 +40,23 @@
 		// (Yokohama, ~140E) and westernmost (Maui, ~156W) talks, with a
 		// little headroom for future additions.
 		var EDGE_BUFFER_DEG = 70;
+
+		// Separately, at this map's default (most zoomed-out) view the
+		// container shows exactly -90..90 latitude with zero margin (width
+		// and height both bind at once, since the container's 2:1 aspect
+		// matches the world's). A popup opened above a high-latitude marker
+		// needs room north of it to render, and Leaflet's autoPan can't
+		// create that room if maxBounds is locked to exactly +/-90 -- it
+		// has nowhere further to pan, so the popup renders clipped off the
+		// top of the map instead (confirmed for Lappeenranta, our
+		// northernmost talk at 61N). There's no real land/imagery past the
+		// poles to show, so this buffer is just blank autoPan headroom, not
+		// a ghost copy like the longitude one above. 50 degrees covers
+		// Lappeenranta with room for talks somewhat further north too.
+		var LAT_BUFFER_DEG = 50;
 		var panBounds = L.latLngBounds(
-			[-90, -180 - EDGE_BUFFER_DEG],
-			[90, 180 + EDGE_BUFFER_DEG]
+			[-90 - LAT_BUFFER_DEG, -180 - EDGE_BUFFER_DEG],
+			[90 + LAT_BUFFER_DEG, 180 + EDGE_BUFFER_DEG]
 		);
 
 		var map = L.map('map', {
