@@ -149,6 +149,18 @@
 				markers.addLayer(marker);
 			}
 			map.addLayer(markers);
+
+			// Without this, cluster icons (the numbered circles) don't
+			// render on initial load at all -- only already-unclustered
+			// markers do -- and stay invisible until the very first pan or
+			// zoom. Leaflet.markercluster computes its initially-visible
+			// set synchronously in addLayers(), but the clusters only
+			// actually get drawn once a 'moveend' fires (verified with a
+			// headless-Chrome timing trace: clusters stayed at 0 for 10+
+			// seconds until any interaction; a synthetic 'moveend' with no
+			// real pan/zoom fixes it immediately, so this is a no-visible-
+			// effect nudge, not an actual map movement).
+			map.fire('moveend');
 		});
 		window.addEventListener('resize', function () {
 			map.invalidateSize();
