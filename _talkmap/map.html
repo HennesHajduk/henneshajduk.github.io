@@ -30,20 +30,25 @@
 		var worldBounds = L.latLngBounds([-90, -180], [90, 180]);
 
 		// At this map's default (most zoomed-out) view the container shows
-		// exactly -90..90 latitude with zero margin (width and height both
-		// bind at once, since the container's 2:1 aspect matches the
-		// world's). A popup opened above a high-latitude marker needs room
-		// north of it to render, and Leaflet's autoPan can't create that
-		// room if maxBounds is locked to exactly +/-90 -- it has nowhere
-		// further to pan, so the popup renders clipped off the top of the
-		// map instead (confirmed for Lappeenranta, our northernmost talk at
-		// 61N). There's no real land/imagery past the poles to show, so
-		// this buffer is just blank autoPan headroom. 50 degrees covers
-		// Lappeenranta with room for talks somewhat further north too.
+		// exactly -90..90 latitude (and, symmetrically, -180..180
+		// longitude) with zero margin -- width and height both bind at
+		// once, since the container's 2:1 aspect matches the world's. A
+		// popup opened above/beside a marker near any of those four edges
+		// needs room beyond it to render, and Leaflet's autoPan can't
+		// create that room if maxBounds is locked to exactly the true
+		// edge -- it has nowhere further to pan, so the popup renders
+		// clipped instead (confirmed for Lappeenranta, our northernmost
+		// talk at 61N, and the same applies east/west for talks like
+		// Yokohama/Maui near +/-180). There's no real land/imagery beyond
+		// either edge to show (poles, or the same world repeating), so
+		// these buffers are just blank autoPan headroom, not a ghost copy
+		// of real content -- 50/70 degrees covers this site's actual talks
+		// with some room for future additions.
 		var LAT_BUFFER_DEG = 50;
+		var LON_BUFFER_DEG = 70;
 		var panBounds = L.latLngBounds(
-			[-90 - LAT_BUFFER_DEG, -180],
-			[90 + LAT_BUFFER_DEG, 180]
+			[-90 - LAT_BUFFER_DEG, -180 - LON_BUFFER_DEG],
+			[90 + LAT_BUFFER_DEG, 180 + LON_BUFFER_DEG]
 		);
 
 		var map = L.map('map', {
