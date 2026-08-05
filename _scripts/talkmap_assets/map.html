@@ -72,11 +72,13 @@
 		// Country borders as a vector overlay rather than baked into the
 		// raster: stays crisp at any zoom level, and lines up directly with
 		// this map's plate-carree CRS (plain lat/lon, no reprojection)
-		// since the source data (Natural Earth 1:50m admin-0 countries,
-		// picked over the coarser 1:110m for borders fine enough to track
-		// the coastline detail at max zoom, and over the much heavier 1:10m
-		// which is overkill given this basemap's own resolution ceiling) is
-		// already WGS84.
+		// since the source data is already WGS84. Using Natural Earth
+		// 1:10m admin-0 countries here (not 50m/110m): confirmed visually
+		// (Norwegian fjords, side-by-side screenshots) that 50m still cuts
+		// straight across coastal detail the basemap clearly resolves --
+		// 10m tracks it far more closely. Costs ~4.3MB gzipped over the
+		// wire instead of 50m's ~800KB, a deliberate trade-off for
+		// coastline accuracy.
 		fetch('countries.geojson')
 			.then(function (r) { return r.json(); })
 			.then(function (data) {
