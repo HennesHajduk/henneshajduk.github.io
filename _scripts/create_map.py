@@ -53,16 +53,27 @@ S[np.abs(Lat_topo) > 89.5] = np.nan
 
 # Land/water from elevation sign alone misclassifies below-sea-level dry
 # land (Netherlands polders, Death Valley, the Caspian/Qattara/Turpan
-# depressions, ...) as ocean. Use Natural Earth's land polygon instead --
-# curated specifically for this distinction, unlike "inside a country"
-# (which would wrongly swallow the Caspian Sea, Great Lakes, etc. as
-# land). The land polygon alone still doesn't cut out major lakes at this
-# simplification level (verified: Lake Superior/Michigan render as solid
-# land in ne_50m_land, apparently merged into the continental outline),
-# so lakes.geojson is subtracted separately. Both are 1:50m, matching the
-# resolution already used for the on-map country borders; these files are
-# build-time-only inputs (never shipped to the web map), so their size
-# isn't a page-weight concern.
+# depressions, ...) as ocean. But wholesale-replacing the coastline with a
+# simplified vector polygon (as an earlier version of this script did)
+# trades that bug for a worse one: a 1:50m vector coastline diverges from
+# this raster's own much finer natural detail almost everywhere, not just
+# at the anomalies it was meant to fix (visible as a mismatch between this
+# image and the on-map country borders, which trace the same coastline).
+# So elevation sign stays the primary source -- it's already at this
+# raster's native resolution, so it can't "mismatch" the terrain -- and
+# Natural Earth's land polygon is only ORed in on top, adding land
+# classification solely where elevation sign said water but the polygon
+# says land: exactly the below-sea-level anomalies, nowhere else.
+#
+# Lakes need separate handling regardless: elevation sign alone can never
+# exclude them (a lake surface sits at a positive elevation just like the
+# land around it, e.g. Lake Superior at ~183m), so they're subtracted from
+# the final mask unconditionally -- not just from the correction term --
+# using lakes.geojson (ne_50m_land also doesn't cut lakes out as holes at
+# this simplification level, apparently merged into the continental
+# outline, hence needing this separate file at all). Both geojson files are
+# 1:50m build-time-only inputs (never shipped to the web map), so their
+# size isn't a page-weight concern.
 land_transform = from_bounds(bounds.left, bounds.bottom, bounds.right, bounds.top, new_width, new_height)
 
 def rasterize_geojson(path):
@@ -72,7 +83,9 @@ def rasterize_geojson(path):
         shapes, out_shape=(new_height, new_width), transform=land_transform, fill=0, dtype="uint8"
     ).astype(bool)
 
-land_mask = rasterize_geojson("land.geojson") & ~rasterize_geojson("lakes.geojson")
+lake_mask = rasterize_geojson("lakes.geojson")
+below_sea_level_land = rasterize_geojson("land.geojson") & ~lake_mask
+land_mask = ((topo_coarse > 0) | below_sea_level_land) & ~lake_mask
 water_mask = ~land_mask
 
 S_land = np.where(land_mask, S, np.nan)
