@@ -2,6 +2,7 @@
 
 cd "$(git rev-parse --show-toplevel)"
 
+git pull
 scripts/bbl2md.py
 scripts/tex2talks.py
 _talkmap/talkmap.py
