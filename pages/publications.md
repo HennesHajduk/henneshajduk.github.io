@@ -33,11 +33,6 @@ permalink: /publications/
 <p><span style='font-variant: small-caps;'>H. Hajduk</span>, <span style='font-variant: small-caps;'>D. Kuzmin</span>, <span style='font-variant: small-caps;'>V. Aizinger</span> (2020) <em>Bathymetry reconstruction using inverse shallow water models: Finite element discretization and regularization</em>. In <em>Numerical methods for flows</em>, Lecture notes in computational science and engineering, 223-230 (Springer), <a href="https://doi.org/10.1007/978-3-030-30705-9_20">doi:10.1007/978-3-030-30705-9_20</a> </p>
 </div>
 
-## Preprints
-<div>
-<p>\bibitem</p>
-</div>
-
 ## Thesis
 <div>
 <p><span style='font-variant: small-caps;'>H. Hajduk</span> (2022) <em>Algebraically constrained finite element methods for hyperbolic problems with applications in geophysics and gas dynamics</em>. Ph.D. thesis, TU Dortmund University, <a href="https://doi.org/10.17877/DE290R-22850">doi:10.17877/DE290R-22850</a></p>

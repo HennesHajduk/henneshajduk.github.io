@@ -119,7 +119,7 @@ ax.set_axis_off()
 plt.savefig("../images/map.pdf", dpi=dpi, bbox_inches=None, pad_inches=0)
 
 # Web copy: the talk map (Leaflet imageOverlay) caps its max zoom at this
-# image's native pixel width (see _scripts/talkmap_assets/map.html). Using
+# image's native pixel width (see _talkmap/talkmap_assets/map.html). Using
 # the full native ETOPO 60" resolution (21600x10800, i.e. 1080 dpi at
 # 20x10 in) maximizes zoom depth with zero upsampling -- this is the most
 # this source data can give without interpolating pixels that aren't

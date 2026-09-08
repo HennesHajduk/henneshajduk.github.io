@@ -14,6 +14,9 @@ def process_bbl(path):
     with open(path) as f:
         text = f.read()
 
+    if not text.strip():
+        return ""
+
     # remove everything before first \bibitem
     text = re.split(r"\\bibitem", text, maxsplit=1)[-1]
     text = "\\bibitem" + text
@@ -94,6 +97,8 @@ permalink: /publications/
 
 for section, path in files.items():
     html = process_bbl(path)
+    if not html:
+        continue
 
     output += f"## {section}\n<div>\n{html}\n</div>\n\n"
 
