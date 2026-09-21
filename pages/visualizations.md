@@ -77,13 +77,3 @@ figcaption {
     </figcaption>
   </figure>
 </div>
-
-<div class="row">
-  <figure style="max-width: 800px;">
-    <img src="/images/slope.png" alt="Critical slope">
-    <figcaption>
-      <strong>Global ocean diagnostics.</strong>
-      Visualization of the ratio between topographic and critical slopes derived from observational ocean data. This example illustrates scientific data processing, large-scale visualization, and the analysis of geophysical data sets.
-    </figcaption>
-  </figure>
-</div>
