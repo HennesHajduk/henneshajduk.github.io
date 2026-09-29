@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Leaflet cluster map of talk locations
 #
 # Run this from the _talks/ directory, which contains .md files of all your
