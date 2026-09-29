@@ -7,12 +7,15 @@
 # #talkmap Jupyter notebook.
 import frontmatter
 import glob
+import json
+import os
 import re
 import shutil
 import time
 import getorg
 from geopy import Nominatim
 from geopy.exc import GeocoderTimedOut
+from geopy.location import Location
 
 # Set the default timeout, in seconds
 TIMEOUT = 5
@@ -29,6 +32,16 @@ RATE_LIMIT_SECONDS = 1
 GEOCODE_OVERRIDES = {
     "Casa Matemática Oaxaca, Mexico": "Oaxaca, Mexico",
 }
+
+# On-disk cache of successful geocodes, keyed by query, so that only new
+# locations hit Nominatim (each lookup costs >= RATE_LIMIT_SECONDS). Delete an
+# entry (or the whole file) to force a fresh lookup.
+CACHE_FILE = "_talkmap/geocode_cache.json"
+try:
+    with open(CACHE_FILE) as f:
+        geocode_cache = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    geocode_cache = {}
 
 # Collect the Markdown files
 g = glob.glob("_talks/*.md")
@@ -47,6 +60,18 @@ def geocode_with_fallback(query, timeout):
     result = geocoder.geocode(query, timeout=timeout)
     if result is None and "," in query:
         return geocode_with_fallback(query.split(",", 1)[1].strip(), timeout)
+    return result
+
+
+def geocode_cached(query, timeout):
+    """Look up query in the on-disk cache, geocoding (and caching) it on a miss."""
+    if query in geocode_cache:
+        c = geocode_cache[query]
+        return Location(c["address"], (c["lat"], c["lon"]), {})
+    result = geocode_with_fallback(query, timeout)
+    if result is not None:
+        geocode_cache[query] = {"address": result.address,
+                                "lat": result.latitude, "lon": result.longitude}
     return result
 
 # Perform geolocation
@@ -78,7 +103,7 @@ for file in g:
 
     # Geocode the location and report the status
     try:
-        result = geocode_with_fallback(geocode_query, TIMEOUT)
+        result = geocode_cached(geocode_query, TIMEOUT)
         if result is None:
             print(f"Warning: no geocode match found for {geocode_query}, skipping pin")
             continue
@@ -90,6 +115,10 @@ for file in g:
         print(f"Error: geocode timed out on input {geocode_query} with message {ex}")
     except Exception as ex:
         print(f"An unhandled exception occurred while processing input {geocode_query} with message {ex}")
+
+# Save the geocode cache
+with open(CACHE_FILE, "w") as f:
+    json.dump(geocode_cache, f, indent=2, ensure_ascii=False, sort_keys=True)
 
 # Save the map
 m = getorg.orgmap.create_map_obj()

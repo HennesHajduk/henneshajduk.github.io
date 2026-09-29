@@ -1,0 +1,152 @@
+{
+  "Atlanta, USA": {
+    "address": "Atlanta, Fulton County, Georgia, United States",
+    "lat": 33.7544657,
+    "lon": -84.3898151
+  },
+  "Beijing, China": {
+    "address": "北京市, 中国",
+    "lat": 39.9057136,
+    "lon": 116.3912972
+  },
+  "Biarritz, France": {
+    "address": "Biarritz, Bayonne, Pyrénées-Atlantiques, Nouvelle-Aquitaine, France métropolitaine, 64200, France",
+    "lat": 43.4832523,
+    "lon": -1.5592776
+  },
+  "Bochum, Germany": {
+    "address": "Bochum, Nordrhein-Westfalen, Deutschland",
+    "lat": 51.4818111,
+    "lon": 7.2196635
+  },
+  "Clausthal-Zellerfeld, Germany": {
+    "address": "Clausthal-Zellerfeld, Landkreis Goslar, Niedersachsen, Deutschland",
+    "lat": 51.8070405,
+    "lon": 10.3364483
+  },
+  "Dortmund, Germany": {
+    "address": "Dortmund, Nordrhein-Westfalen, Deutschland",
+    "lat": 51.5142273,
+    "lon": 7.4652789
+  },
+  "Dresden, Germany": {
+    "address": "Dresden, Sachsen, Deutschland",
+    "lat": 51.0493286,
+    "lon": 13.7381437
+  },
+  "Erlangen, Germany": {
+    "address": "Erlangen, Bayern, Deutschland",
+    "lat": 49.5891571,
+    "lon": 10.9812072
+  },
+  "Hanover, Germany": {
+    "address": "Hannover, Region Hannover, Niedersachsen, Deutschland",
+    "lat": 52.3744779,
+    "lon": 9.7385532
+  },
+  "Hirschegg, Austria": {
+    "address": "Hirschegg, Mittelberg, Bezirk Bregenz, Vorarlberg, 6992, Österreich",
+    "lat": 47.342668,
+    "lon": 10.167689
+  },
+  "Lappeenranta, Finland": {
+    "address": "Lappeenranta, Lappeenrannan seutukunta, Etelä-Karjala, Manner-Suomi, Suomi / Finland",
+    "lat": 61.0583417,
+    "lon": 28.1862293
+  },
+  "Livermore, California": {
+    "address": "Livermore, Alameda County, California, United States",
+    "lat": 37.6820583,
+    "lon": -121.768053
+  },
+  "Maui, USA": {
+    "address": "Maui, Maui County, Hawaii, United States",
+    "lat": 20.8029568,
+    "lon": -156.3106833
+  },
+  "Milano, Italy": {
+    "address": "Milano, Rodano, Milano, Lombardia, Italia",
+    "lat": 45.4641943,
+    "lon": 9.1896346
+  },
+  "Monte Verità, Ascona, Switzerland": {
+    "address": "Monte Verità, Ascona, Circolo dell'Isole, Distretto di Locarno, Ticino, 6612, Schweiz/Suisse/Svizzera/Svizra",
+    "lat": 46.1582933,
+    "lon": 8.7630297
+  },
+  "Munich, Germany": {
+    "address": "München, Bayern, Deutschland",
+    "lat": 48.1371079,
+    "lon": 11.5753822
+  },
+  "Oaxaca, Mexico": {
+    "address": "Oaxaca, México",
+    "lat": 17.0,
+    "lon": -96.5
+  },
+  "Oslo, Norway": {
+    "address": "Oslo, Norge",
+    "lat": 59.9133301,
+    "lon": 10.7389701
+  },
+  "Plouzané, France": {
+    "address": "Plouzané, Brest, Finistère, Bretagne, France métropolitaine, 29280, France",
+    "lat": 48.3817165,
+    "lon": -4.6212044
+  },
+  "Prague, Czech Republic": {
+    "address": "Praha, Česko",
+    "lat": 50.0874654,
+    "lon": 14.4212535
+  },
+  "Saarbrücken, Germany": {
+    "address": "Saarbrücken, Regionalverband Saarbrücken, Saarland, Deutschland",
+    "lat": 49.234362,
+    "lon": 6.996379
+  },
+  "Shenzhen, China": {
+    "address": "深圳市, 广东省, 中国",
+    "lat": 22.5445741,
+    "lon": 114.0545429
+  },
+  "Spokane, USA": {
+    "address": "Spokane, Spokane County, Washington, United States",
+    "lat": 47.6571934,
+    "lon": -117.42351
+  },
+  "Stuttgart, Germany": {
+    "address": "Stuttgart, Baden-Württemberg, Deutschland",
+    "lat": 48.7784485,
+    "lon": 9.1800132
+  },
+  "Treis-Karden, Germany": {
+    "address": "Treis-Karden, Cochem, Landkreis Cochem-Zell, Rheinland-Pfalz, 56253, Deutschland",
+    "lat": 50.1754283,
+    "lon": 7.3008675
+  },
+  "Trento, Italy": {
+    "address": "Provincia di Trento, Trentino-Alto Adige/Südtirol, Italia",
+    "lat": 46.1029536,
+    "lon": 11.1297425
+  },
+  "Valencia, Spain": {
+    "address": "València, Comarca de València, València / Valencia, Comunitat Valenciana, España",
+    "lat": 39.4697065,
+    "lon": -0.3763353
+  },
+  "Vysoké Tatry, Slovakia": {
+    "address": "Vysoké Tatry, okres Poprad, Prešovský kraj, Slovensko",
+    "lat": 49.1999166,
+    "lon": 20.179831
+  },
+  "Yokohama, Japan": {
+    "address": "横浜市, 神奈川県, 231-0017, 日本",
+    "lat": 35.4503381,
+    "lon": 139.6343802
+  },
+  "Zürich, Switzerland": {
+    "address": "Zürich, Bezirk Zürich, Zürich, Schweiz/Suisse/Svizzera/Svizra",
+    "lat": 47.3744489,
+    "lon": 8.5410422
+  }
+}
