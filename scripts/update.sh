@@ -5,7 +5,8 @@ cd "$(git rev-parse --show-toplevel)"
 git pull
 scripts/bbl2md.py
 scripts/tex2talks.py
-_talkmap/talkmap.py
+# talkmap.py needs frontmatter/geopy/getorg, which live in this venv
+"$HOME/ml/venv/bin/python3" _talkmap/talkmap.py
 git add pages/publications.md
 git add _talks/*.md
 git add _talkmap/
