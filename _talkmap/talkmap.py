@@ -6,14 +6,19 @@
 # with geopy/Nominatim, and uses the getorg library to output data, HTML, and
 # Javascript for a standalone cluster map. This is functionally the same as the
 # #talkmap Jupyter notebook.
+import contextlib
 import frontmatter
 import glob
+import io
 import json
 import os
 import re
 import shutil
 import time
-import getorg
+# getorg prints a harmless "ipywidgets/ipyleaflet disabled" notice on import
+# whenever it isn't run inside Jupyter; swallow it
+with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+    import getorg
 from geopy import Nominatim
 from geopy.exc import GeocoderTimedOut
 from geopy.location import Location
@@ -109,13 +114,14 @@ for file in g:
             print(f"Warning: no geocode match found for {geocode_query}, skipping pin")
             continue
         location_dict[description] = result
-        print(description, result)
     except ValueError as ex:
         print(f"Error: geocode failed on input {geocode_query} with message {ex}")
     except GeocoderTimedOut as ex:
         print(f"Error: geocode timed out on input {geocode_query} with message {ex}")
     except Exception as ex:
         print(f"An unhandled exception occurred while processing input {geocode_query} with message {ex}")
+
+print(f"talk map: {len(location_dict)} pins from {len(g)} talks")
 
 # Save the geocode cache
 with open(CACHE_FILE, "w") as f:
